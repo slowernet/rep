@@ -1,0 +1,10 @@
+vendor/ruby/*
+config/cachebuster.rb
+.ruby-version
+.DS_Store
+*.log
+*.tmp
+.bundle/*
+.capistrano
+tmp/*
+/.env

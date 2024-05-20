@@ -1,0 +1,74 @@
+GIT
+  remote: https://github.com/slowernet/ohm-sorted
+  revision: e4cbb93dc9e0662e27319fa72ed365e68e9cb2f1
+  specs:
+    ohm-sorted (0.4.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    base64 (0.2.0)
+    bigdecimal (3.1.8)
+    dotenv (3.1.2)
+    ffi (1.16.3)
+    hiredis (0.6.3)
+    jwt (2.8.1)
+      base64
+    listen (3.9.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    nest (3.2.0)
+      redic
+    nio4r (2.7.3)
+    ohm (3.1.1)
+      nest (~> 3)
+      redic (~> 1.5.0)
+      stal
+    ohm-contrib (3.0.0)
+      ohm (~> 3.0)
+    ohm-validations (1.1.0)
+      ohm (~> 3.0, >= 2.0)
+      scrivener (~> 1.0)
+    puma (6.4.2)
+      nio4r (~> 2.0)
+    rack (3.0.11)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
+    rb-fsevent (0.11.2)
+    rb-inotify (0.11.1)
+      ffi (~> 1.0)
+    redic (1.5.3)
+      hiredis
+    rerun (0.14.0)
+      listen (~> 3.0)
+    roda (3.80.0)
+      rack
+    scrivener (1.1.1)
+    stal (0.3.0)
+      redic (~> 1.5)
+    tilt (2.3.0)
+
+PLATFORMS
+  aarch64-linux
+  arm-linux
+  arm64-darwin
+  x86-linux
+  x86_64-darwin
+  x86_64-linux
+
+DEPENDENCIES
+  bigdecimal
+  dotenv
+  jwt
+  ohm
+  ohm-contrib
+  ohm-sorted!
+  ohm-validations
+  puma
+  rack-cors
+  rerun
+  roda
+  tilt
+
+BUNDLED WITH
+   2.5.6

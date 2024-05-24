@@ -6,7 +6,7 @@
 - Community platform integration? https://ghost.org/integrations/circle/
 	- SSO bridge?
 - Audio podcast generation middleware?
-	- webhook, look for tag,
+	- webhook on publish/update, look for tag, push to eleven labs
 - User profile data middleware?
   	- Job title, Job function, Company name, Company type
 

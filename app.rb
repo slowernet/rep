@@ -4,66 +4,21 @@ require 'bundler'
 Bundler.require
 
 %w(config/initializers).each { |p| Dir["./#{p}/**/*.rb"].each  { |rb| require rb } }
-%w(lib app/models app/routes).each { |p| Dir["./#{p}/**/*.rb"].each  { |rb| require rb } }
-
-module Helpers
-	def hash12(s)
-		Digest::MD5.new.update(s).hexdigest[0,12]
-	end
-
-	def halt(error)
-		request.halt(400, {'X-Error': error}, nil)
-	end
-end
+%w(lib app/models app/routes app/helpers).each { |p| Dir["./#{p}/**/*.rb"].each  { |rb| require rb } }
 
 class App < Roda
 	plugin :render, views: 'app/views'
-	plugin :halt
-	plugin :json_parser
 	plugin :public
+
+	plugin :multi_run
+	App.run "unlock", UnlockApp
 
 	include Helpers
 
 	route do |r|
 		r.public
 
-		r.on 'unlock' do
-			response['Content-Type'] = 'application/json'
-
-			r.get 'all' do
-				halt('uid missing') if (uid = request.params['uid']).nil?
-				Unlock.find({ uid: uid }).to_a.map do |u|
-					a = u.attributes.merge(id: u.id, expired: u.expired?, uses: u.uses)
-				end.to_json
-			end
-
-			halt('pid missing') if (pid = request.params['pid']).nil? || pid.empty?
-			pid = hash12(pid)
-
-			r.get 'status' do
-				halt('uid missing') if (uid = request.params['uid']).nil?
-				u = Unlock.find({ uid: uid, pid: pid }).first
-				{ code: u.code, remaining: User.remaining(uid) }.to_json
-			end
-
-			r.get 'try' do
-				halt('code missing') if (code = request.params['code']).nil? || code.empty?
-				{ unlocked: Unlock.unlocked?(pid, code) }.to_json
-			end
-
-			r.post do
-				# limitation: uid cannot create a second code for pid, even after first expires
-				halt('uid missing') if (uid = request.params['uid']).nil?
-				halt('duplicate') if Unlock.find({ uid: uid, pid: pid }).first
-				halt('token missing') if (token = request.params['token']).nil?
-				halt('jwks missing') if (jwks = request.params['jwks']).nil?
-				pk = JWT::JWK::Set.new(jwks).first.public_key
-				JWT.decode(token, pk, true, algorithms: 'RS512') rescue	halt('token invalid')
-
-				u = Unlock.create({ uid: uid, pid: pid })
-				{ code: u.code, remaining: User.remaining(uid) }.to_json
-			end
-		end
+		r.multi_run
 
 		r.root do
 			view :index

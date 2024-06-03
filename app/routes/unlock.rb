@@ -22,7 +22,7 @@ class UnlockApp < Roda
 		r.get 'status' do
 			halt('uid missing') if (uid = request.params['uid']).nil?
 			u = Unlock.find({ uid: uid, pid: pid }).first
-			{ code: u&.code, remaining: User.remaining(uid) }.to_json
+			{ code: u&.code, remaining: User.remaining(uid), quota: User.quota(uid) }.to_json
 		end
 
 		r.get 'try' do

@@ -10,7 +10,12 @@ GEM
     base64 (0.2.0)
     bigdecimal (3.1.8)
     dotenv (3.1.2)
-    ffi (1.16.3)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86-linux-gnu)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     hiredis (0.6.3)
     jwt (2.8.1)
       base64

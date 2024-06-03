@@ -9,6 +9,10 @@ module User
 		used = Unlock.sorted_find(:created_at, uid: uid).between(first_of_month_ts, Time.now.utc.to_i).size
 		ENV['UNLOCK_QUOTA_PER_MONTH'].to_i - used
 	end
+
+	def self.quota(uid)
+		ENV['UNLOCK_QUOTA_PER_MONTH'].to_i
+	end
 end
 
 class Unlock < Ohm::Model

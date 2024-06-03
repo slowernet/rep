@@ -1,25 +1,55 @@
 ## Services to augment Ghost
-
 - Gift individual articles a la NYT
 - Trending stories tracker
 - Lead gen ad middleware?
+- Track visit streaks, referrals, CC updates w/ points, gamification, discounts
 - Community platform integration? https://ghost.org/integrations/circle/
 	- SSO bridge?
 - Audio podcast generation middleware?
 	- webhook on publish/update, look for tag, push to eleven labs
+- Article summarization middleware?
 - User profile data middleware?
   	- Job title, Job function, Company name, Company type
 
 ## Unlock
-
 - how many unlocks left?
 - check is unlocked?
 - create unlock code
 
 ## Fonts
-
 GT Pressura
 https://www.grillitype.com/typeface/gt-pressura
 
 Tarnac
 https://sharptype.co/typefaces/tarnac/Tarnac/
+
+--
+
+Subscribed
+Gift articles
+Give paywall-free access to this article. You have 5 gift articles left to share this month. Learn more.
+
+Not a subscriber or not logged in
+Subscriber benefit: give articles to anyone
+Times subscribers can give 10 gift articles each month. Anyone can read them — even nonsubscribers.
+Log in Learn more Subscribe
+
+Already shared
+Share article again
+You’ve shared this story before — thanks. Share it again and it won’t count toward your gift article limit. Learn more.
+
+Out of gift articles
+You've used all your gift articles this month. You'll receive N more on the 1st of next month.
+
+Redeemer
+You have access to this article thanks to someone you know.
+Keep exploring The Times with a free account.
+Log in or create account
+
+
+---
+https://claude.ai/chat/a17edc55-1286-469f-b6f6-e0f2abf52599
+
+[ARTICLE]
+
+Please read the above article carefully and summarize the key points in 3 concise bullet points of 1-2 sentences each. Focus the summary on the most important takeaways a reader should know, rather than trying to capture all details.

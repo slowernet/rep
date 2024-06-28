@@ -17,7 +17,7 @@ GEM
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     hiredis (0.6.3)
-    jwt (2.8.1)
+    jwt (2.8.2)
       base64
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -36,7 +36,7 @@ GEM
       scrivener (~> 1.0)
     puma (6.4.2)
       nio4r (~> 2.0)
-    rack (3.0.11)
+    rack (3.1.4)
     rack-cors (2.0.2)
       rack (>= 2.0.0)
     rb-fsevent (0.11.2)
@@ -46,12 +46,12 @@ GEM
       hiredis
     rerun (0.14.0)
       listen (~> 3.0)
-    roda (3.80.0)
+    roda (3.81.0)
       rack
     scrivener (1.1.1)
     stal (0.3.0)
       redic (~> 1.5)
-    tilt (2.3.0)
+    tilt (2.4.0)
 
 PLATFORMS
   aarch64-linux

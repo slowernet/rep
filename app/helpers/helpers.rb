@@ -3,7 +3,7 @@ module Helpers
 		Digest::MD5.new.update(s).hexdigest[0,12]
 	end
 
-	def halt(error)
-		request.halt(400, {'X-Error': error}, nil)
+	def error(m)
+		request.halt(400, {'X-Error': m}, nil)
 	end
 end

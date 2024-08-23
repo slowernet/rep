@@ -1,27 +1,11 @@
-## Services to augment Ghost
-- Gift individual articles a la NYT
-- Trending stories tracker
-- Lead gen ad middleware?
-- Track visit streaks, referrals, CC updates w/ points, gamification, discounts
-- Community platform integration? https://ghost.org/integrations/circle/
-	- SSO bridge?
-- Audio podcast generation middleware?
-	- webhook on publish/update, look for tag, push to eleven labs https://elevenlabs.io/
-- Article summarization middleware?
-- User profile data middleware?
-  	- Job title, Job function, Company name, Company type
-
-## Unlock
+## Gift unlock
 - how many unlocks left?
 - check is unlocked?
 - create unlock code
 
 ## Fonts
-GT Pressura
-https://www.grillitype.com/typeface/gt-pressura
-
-Tarnac
-https://sharptype.co/typefaces/tarnac/Tarnac/
+GT Pressura https://www.grillitype.com/typeface/gt-pressura
+Tarnac https://sharptype.co/typefaces/tarnac/Tarnac/
 
 .mode-is-unlock
 .mode-not-subscribed
@@ -54,9 +38,11 @@ Log in or create account
 
 pk_live_51G1wloHZc73G564Ue3ORGFbCdVotwZP3wyBai50ya2SuEaLFeat4AzJYo7PzBFYreWrhO1QXX9MhSBQc3WXHrOUs004y19abXD
 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
+
 ---
 https://claude.ai/chat/a17edc55-1286-469f-b6f6-e0f2abf52599
 
 [ARTICLE]
 
-Please read the above article carefully and summarize the key points in 3 concise bullet points of 1-2 sentences each. Focus the summary on the most important takeaways a reader should know, rather than trying to capture all details.
+Please read the above article carefully and summarize the key points in 3 concise bullet points of 1-2 sentences each.
+Focus the summary on the most important takeaways an informed reader should know, rather than trying to capture all details.

@@ -15,3 +15,6 @@ gem 'jwt'
 gem 'puma'
 gem 'rerun'
 gem 'rack-cors'
+
+gem 'ruby-openai'
+gem 'rss'

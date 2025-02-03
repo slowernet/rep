@@ -1,0 +1,24 @@
+<h2 class="fw5"><%= @publication.name %></h2>
+
+<div class="w-25">
+	<% @publication.sources.each do |s| %>
+		<div class="flex items-center justify-between mb3">
+			<%= s.name %>
+			<button class="pa2 bg-green white br2 bn flex f6 pointer" data-url="<%= s.rss_url %>">fetch stories</button>
+		</div>
+  	<% end %>
+</div>
+
+<script>
+	const qs = (s,o=document) => o.querySelector(s), qsa = (s,o=document) => o.querySelectorAll(s)
+
+	qsa('button[data-url]').forEach(el => {
+		el.addEventListener('click', ev => {
+			fetch('/rc/api/publications/<%= @publication.id %>/articles', {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({feed_url: el.dataset.url})
+			}).then(r => r.json()).then(e => console.log(e))
+		})
+	})
+</script>

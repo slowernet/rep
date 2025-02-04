@@ -12,9 +12,13 @@ gem 'ohm-sorted', git: 'https://github.com/slowernet/ohm-sorted'
 gem 'bigdecimal'
 gem 'jwt'
 
-gem 'puma'
+# gem 'puma'
 gem 'rerun'
 gem 'rack-cors'
 
 gem 'ruby-openai'
+gem 'gemini-ai'
 gem 'rss'
+
+gem 'rackup'
+gem 'webrick'

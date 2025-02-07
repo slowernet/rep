@@ -23,7 +23,6 @@
 
 	const init = async () => {
 		window.addEventListener('click', ev => {
-			console.log(ev)
 			STATE.event_queue.push({ type: 'click', loc: [ev.pageX, ev.pageY] })
 			if (STATE.event_queue.length >= EVENT_QUEUE_BUFFER_LENGTH) {
 				API.send(STATE.event_queue)
@@ -31,6 +30,6 @@
 			}
   		})
 	}
-
+‬
 	init()
 })();

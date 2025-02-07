@@ -121,7 +121,6 @@ DEPENDENCIES
   bigdecimal
   dotenv
   gemini-ai
-  jwt
   ohm
   ohm-contrib
   ohm-sorted!

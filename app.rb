@@ -4,7 +4,7 @@ require 'bundler'
 Bundler.require
 
 %w(config/initializers).each { |p| Dir["./#{p}/**/*.rb"].each  { |rb| require rb } }
-%w(app/lib app/models app/routes app/helpers).each { |p| Dir["./#{p}/**/*.rb"].each  { |rb| require rb } }
+%w(lib app/models app/routes app/helpers).each { |p| Dir["./#{p}/**/*.rb"].each  { |rb| require rb } }
 
 class App < Roda
 	plugin :render, views: 'app/views'

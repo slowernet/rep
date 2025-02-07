@@ -138,7 +138,7 @@
 (() => {
 	const cs = document.currentScript
 	const UNLOCK_BASEURL = new URL(cs.src).origin
-	const qs = (s,o=document) => o.querySelector(s), qsa = (s,o=document) => o.querySelectorAll(s)
+const qs = (s,o=document) => o.querySelector(s), qsa = (s,o=document) => o.querySelectorAll(s)
 	const body = qs('body')
 	const urlParams = new URLSearchParams(location.search)
 

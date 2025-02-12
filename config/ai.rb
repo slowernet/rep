@@ -19,59 +19,12 @@ module Config
 		ACTIVE_PROVIDER = ::AI::Gemini
 		# ACTIVE_PROVIDER = ::AI::OpenAI
 
-		SOURCER_PROMPT = <<~EOT
-Instructions
-* Assist by processing the provided array of headline-article pairs, returning the data listed below in a JSON object for each pair.
-* Wrap the array of those objects in an outer object under key "results".
-* All responses should be in the context of the the project subject area: "%{subject_area}"
-
-Data to return
-* "is_relevant"
-	* A score on a scale 0 to 1 indicating the strength of relevance of the content to the project subject area.
-* "is_newsworthy"
-	* A score on a scale 0 to 1 indicating the newsworthiness of the content in the context of the project subject area.
-	* The following are factors in newsworthiness:
-		* the number of people likely to be affected by the news
-		* the amount of disruption the news could cause
-		* how unexpected the news is in the context of the project subject area
-* "is_service"
-	* A score on a scale 0 to 1 indicating the likelihood that the content is how-to, educational, or service journalism
-* "is_roundup"
-	* A score on a scale 0 to 1 indicating the likelihood that the content is a roundup or summary of other content, determined by the inclusion of several diverse topics and links to other content.
-* "is_sponsored"
-	* A score on a scale 0 to 1 indicating the likelihood that the content is sponsored or paid advertising.
-* "beat_relevance"
-	* An object describing the strength of association of the content to each of these concepts on a scale of 0 to 1:
-```json
-%{beat_descriptions}
-```
-* "top_concept"
-	* A single keyword or keyphrase of at most three words that best expresses the primary concept of the content in the context of the project subject area
-	* The selected word or phrase should be a conceptual grouping that can apply to that commonly applies to content in the project subject area
-* "tags"
-	* A list of up to 10 keywords (people, companies, organizations, concepts, or places) relevant the content and the project subject area
-	* Use inference to identify concepts suggested but not stated.
-	* Prioritize the most directly related tags
-* "celebrities"
-	* An array of names of very well-known people or celebrities in the United States associated with the content
-	* If no well-known are present, return an empty array
-* "article_summary" - A one sentence summary of the article (not headline) content, that:
-	* does not repeat the language of the headline or the article
-	* adds interesting information and detail about the item from the article that is not present in the headline
-	* uses a voice indicating some expertise in the project subject area
-	* is not prefaced with introductory language like "The piece discusses..." or "The article explores..".
-* "combined_summary" - A one sentence summary of the headline and article together, that:
-	* will be shared instead of both the headline and article, so it must stand on its own informationally
-	* uses interesting information and detail about the item from both headline and article, but does not repeat the language of either
-	* uses a voice indicating some expertise in the project subject area
-	* is not prefaced with introductory language like "The piece discusses..." or "The article explores..".
-
-Headline-Article pairs
-```json
-%{json}
-```
-EOT
+		SOURCER_PROMPT = File.read('./config/prompts/sourcer.txt').freeze
+		SOURCER_PROMPT_INFO = `git log -1 --format="%H %ci" -- './prompts/sourcer.txt'`.strip
+		PICKER_PROMPT = File.read('./config/prompts/picker.txt').freeze
+		PICKER_PROMPT_INFO = `git log -1 --format="%H %ci" -- './prompts/picker.txt'`.strip
 	end
+
 end
 
 # Assist users with taxonomic classification and identification of keywords pertaining to the residential real estate industry in written content in the form headline-article pairs. The purpose of generating these keywords is to help populate the tags field of a content management system.

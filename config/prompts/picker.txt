@@ -1,0 +1,4 @@
+Assist in selecting a set of 8 stories to include in an email newsletter that has the goal of providing a concise summary of industry news in the subject area: "%{subject_area}".
+
+Criteria for selection
+* Do not include stories that are likely to be sponsored marketing content. This may be denoted by a high "is_sponsored" score

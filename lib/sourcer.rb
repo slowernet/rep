@@ -30,6 +30,3 @@ module Sourcer
 		end
 	end
 end
-
-module Picker
-end

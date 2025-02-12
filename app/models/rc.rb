@@ -30,6 +30,7 @@ class Article < Ohm::Model
 	reference :source, :Source
 	attribute :url
 	attribute :ai_model
+	attribute :prompt_info
 	attribute :json
 end
 

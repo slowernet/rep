@@ -66,12 +66,12 @@ puts request.POST
 							}
 puts prompt	# return
 							ai = (Config::AI::ACTIVE_PROVIDER).completion(prompt)
+puts ai.to_json; return
 # ai.each { |a| puts a['tags'].to_json } # return
 							rv = feed.map.with_index do |item, i|
 								item['source'] = source.name
 								item.merge(ai[i])
 							end
-# puts ai.to_json; # return
 # ai.each { |i| puts i.keys.to_s }
 # pp rv[0].to_json; return
 
@@ -83,7 +83,7 @@ puts prompt	# return
 								item = item.values
 								acc << (item.unshift(Config::AI::ACTIVE_PROVIDER.model) << now)
 							end
-# puts sheet_data.to_json
+puts sheet_data.to_json
 # url:, spreadsheet_id:, worksheet_id:, sheet_data
 							send_to_sheet(
 								url: Config::Pipedream::ARRAY_TO_SHEET_URL,
@@ -105,6 +105,7 @@ puts prompt	# return
 									publication_id: @publication.id,
 									source_id: source.id,
 									ai_model: Config::AI::ACTIVE_PROVIDER.model,
+									prompt_info: Config::AI::SOURCER_PROMPT_INFO,
 									url: item['url'],
 									json: item.to_json
 								)

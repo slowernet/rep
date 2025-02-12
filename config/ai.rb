@@ -18,11 +18,11 @@ module Config
 
 		ACTIVE_PROVIDER = ::AI::Gemini
 		# ACTIVE_PROVIDER = ::AI::OpenAI
-
+puts `pwd`
 		SOURCER_PROMPT = File.read('./config/prompts/sourcer.txt').freeze
-		SOURCER_PROMPT_INFO = `git log -1 --format="%H %ci" -- './prompts/sourcer.txt'`.strip
+		SOURCER_PROMPT_INFO = `TZ=UTC git log -1 --date=format-local:":%Y-%m-%d %H:%M:%S %z" --format="%h %cd" -- config/prompts/sourcer.txt`.strip.freeze
 		PICKER_PROMPT = File.read('./config/prompts/picker.txt').freeze
-		PICKER_PROMPT_INFO = `git log -1 --format="%H %ci" -- './prompts/picker.txt'`.strip
+		PICKER_PROMPT_INFO = `TZ=UTC git log -1 --date=format-local:":%Y-%m-%d %H:%M:%S %z" --format="%h %cd" -- config/prompts/picker.txt`.strip.freeze
 	end
 
 end

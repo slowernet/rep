@@ -23,13 +23,13 @@
 	</div>
 </div>
 
-<script async src="https://www.unpkg.com/tinycolor2@1.6.0/cjs/tinycolor.js"></script>
+<script defer src="https://www.unpkg.com/tinycolor2@1.6.0/cjs/tinycolor.js"></script>
 <script>
 	const qs = (s,o=document) => o.querySelector(s), qsa = (s,o=document) => o.querySelectorAll(s)
 
 	document.addEventListener('DOMContentLoaded', () => {
+		const c = tinycolor.random().lighten().desaturate().setAlpha(.5)
 		qsa('button[data-source-id]').forEach(el => {
-			const c = tinycolor.random().lighten().desaturate().setAlpha(.5)
 			el.addEventListener('click', ev => {
 				fetch('/rc/api/publications/<%= @publication.id %>/articles', {
 					method: 'PUT',

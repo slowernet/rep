@@ -1,0 +1,145 @@
+<style>
+	:root {
+		--box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(17, 24, 39, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
+	}
+
+	mark {
+		background-color: #fdffdbeb;
+		padding: 0.15rem 0.75rem;
+		-webkit-box-decoration-break: clone;
+		box-decoration-break: clone;
+	}
+
+	#container04 {
+		position: fixed !important;
+		top: 24px;
+		z-index: 10;
+	}
+
+	#container01 > .wrapper > .inner {
+		padding-top: 10rem;
+		padding-bottom: 2.5rem;
+	}
+
+	#container06 > .wrapper > .inner {
+		padding-bottom: 2rem;
+	}
+
+	@media (max-width: 480px) {
+		#container04 .inner div:last-child {
+			display: none;
+		}
+		#container06 input[type=email] {
+			border-color: #222 !important;
+		}
+	}
+
+	body:has(#welcome-section.active) #form03 {
+		display: none;
+	}
+
+	.home-button li a {
+		font-family: system-ui !important;
+		box-shadow: var(--box-shadow);
+	}
+
+	.home-button li a span {
+		font-weight: 600;
+	}
+
+	@media (max-width: 480px) {
+		.home-button li a {
+			line-height: 2.5rem;
+			height: 2.5rem;
+		}
+	}
+
+	.subscribe-form input[type=email] {
+		border: 2px solid #aaa !important;
+	}
+
+	.subscribe-form .inner {
+		align-items: center !important;
+	}
+
+	.subscribe-form button {
+		letter-spacing: 0.2px !important;
+		text-decoration: none;
+		cursor: pointer;
+		border: 2px solid !important;
+		padding: 0.35em 0.5em !important;
+		box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px;
+		position: relative;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		background: #fff;
+		font-size: 0.96rem !important;
+		display: initial !important;
+		height: auto !important;
+		line-height: normal !important;
+		position: relative !important;
+		transition: none !important;
+		top: -1px;
+	}
+
+	.subscribe-form button:active {
+		box-shadow: 0px 0px 0px 0px;
+		top: 2px;
+		left: 2px;
+	}
+
+	.subscribe-form button:hover {
+		background: #fffed0;
+	}
+
+	@media (min-width: 768px) {
+		.subscribe-form button {
+			padding: 0.25em 0.75em;
+		}
+	}
+
+	#welcome-section form .field,
+	#welcome-section form .actions {
+		width: 100%;
+	}
+
+	#welcome-section form .field label:first-child {
+		margin: 0 0 2px 3px !important;
+	}
+
+	.box-shadow {
+		box-shadow: var(--box-shadow);
+	}
+
+	#container03 p {
+		padding: 1.5rem;
+		background: #fff;
+		border-radius: 1rem;
+		border: 1px solid #ddd;
+		box-shadow: var(--box-shadow);
+		margin-bottom: 1.5rem !important;
+	}
+</style>
+
+<script>
+	const qs = (s,o=document) => o.querySelector(s), qsa = (s,o=document) => o.querySelectorAll(s)
+	const wrap = (wrap_this, in_this) => {
+		let m = document.createElement(in_this)
+		Array.from(wrap_this.childNodes).forEach(c => m.appendChild(c))
+		wrap_this.insertAdjacentElement("afterBegin", m)
+	}
+
+	document.addEventListener('DOMContentLoaded', () => {
+		document.querySelector('meta[name="viewport"]').setAttribute("content",
+			"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1, user-scalable=0")
+
+		// highlight
+		wrap(qs('#text01'), 'mark')
+
+		// bold
+		const h = (hb = qs('.home-button li a')).innerHTML
+		const m = h.match(/^([\w\d]+\s)(.+)(\s[\w\d]+)$/)
+		hb.innerHTML = `${m[1]}<span>${m[2]}</span>${m[3]}`
+	})
+</script>

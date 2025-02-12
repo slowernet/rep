@@ -1,3 +1,10 @@
+bundle exec rake seeds:publications
+bundle exec rake seeds:beats
+bundle exec rake seeds:sources
+
+
+
+
 ## Gift unlock
 - how many unlocks left?
 - check is unlocked?

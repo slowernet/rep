@@ -1,15 +1,19 @@
+require 'open-uri'
+
 module Sourcer
 	def get_feed(url)
-		rss = URI.open(url).read
+		feed = URI.open(url).read
 		now = Time.now.utc
-		RSS::Parser.parse(rss).items.reduce([]) do |acc, item|
+		items = SimpleRSS.parse(feed).items
+		# RSS::Parser.parse(rss).items.reduce([]) do |acc, item|
+		items.reduce([]) do |acc, item|
 			next acc if (now - item.pubDate.utc) > (5 * 86400)
 			i = {}
 			i['headline'] = item.title
-			i['unique_id'] = item.guid.content
+			i['article'] = item.description.strip
+			i['unique_id'] = item.guid.is_a?(String) ? item.guid : item.guid.content
 			i['publication_date'] = item.pubDate
 			i['url'] = item.link
-			i['article'] = item.description.strip
 			acc << i
 		end
 	end

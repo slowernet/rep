@@ -1,34 +1,46 @@
-<div class="mb4">
-	<h2 class="fw5 mv1"><%= @publication.name %></h2>
-	<h3 class="f7 fw4 mv1"><%= @publication.subject_area %> <span class="f7 fw4 gray">(<%= Config::AI::ACTIVE_PROVIDER.model %>)</span></h3>
+<div class="mw7 center">
+	<div class="mb4">
+		<h2 class="fw5 mv1"><%= @publication.name %></h2>
+		<h3 class="f7 fw4 mv1"><%= @publication.subject_area %> <span class="f7 fw4 gray">(<%= Config::AI::ACTIVE_PROVIDER.model %>)</span></h3>
+	</div>
+
+	<div class="mb4">
+		<% @publication.sources.each do |s| %>
+			<div class="flex items-center mb3">
+				<button class="pa2 bg-transparent br2 bn flex f6 pointer" data-source-id="<%= s.id %>">Fetch <%= s.name %> stories</button>
+			</div>
+	  	<% end %>
+	</div>
+
+	<div>
+		<h2 class="fw4 mb3">Beats</h2>
+		<% @publication.beats.each do |b| %>
+			<div class="mb3 f6">
+				<div class="fw6"><%= b.slug %></div>
+				<div><%= b.description %></div>
+			</div>
+	  	<% end %>
+	</div>
 </div>
 
-<div class="">
-	<% @publication.sources.each do |s| %>
-		<div class="flex items-center mb3">
-			<button class="pa2 bg-dark-blue white br2 bn flex f6 pointer" data-source-id="<%= s.id %>">Fetch <%= s.name %> stories</button>
-		</div>
-  	<% end %>
-	<% @publication.beats.each do |b| %>
-		<div class="flex items-center mb2 f6">
-			<pre class="w-20"><%= b.slug %></pre>
-			<div><%= b.description %></div>
-		</div>
-  	<% end %>
-</div>
-
+<script async src="https://www.unpkg.com/tinycolor2@1.6.0/cjs/tinycolor.js"></script>
 <script>
 	const qs = (s,o=document) => o.querySelector(s), qsa = (s,o=document) => o.querySelectorAll(s)
 
-	qsa('button[data-source-id]').forEach(el => {
-		el.addEventListener('click', ev => {
-			fetch('/rc/api/publications/<%= @publication.id %>/articles', {
-				method: 'PUT',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					source_id: el.dataset.sourceId
-				})
-			}).then(r => r.json()).then(e => console.log(e))
+	document.addEventListener('DOMContentLoaded', () => {
+		qsa('button[data-source-id]').forEach(el => {
+			const c = tinycolor.random().lighten().desaturate().setAlpha(.5)
+			el.addEventListener('click', ev => {
+				fetch('/rc/api/publications/<%= @publication.id %>/articles', {
+					method: 'PUT',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						source_id: el.dataset.sourceId
+					})
+				}).then(r => r.json()).then(e => console.log(e))
+			})
+
+			el.style.backgroundColor = c.spin(137.5)
 		})
 	})
 </script>

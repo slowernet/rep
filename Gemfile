@@ -15,9 +15,13 @@ gem 'rack-cors'
 
 gem 'ruby-openai'
 gem 'gemini-ai'
-gem 'rss'
+# gem 'rss'
+gem 'simple-rss'
 
 # gem 'puma'
-gem 'rerun'
-gem 'rackup'
-gem 'webrick'
+group :development do
+	gem 'rake'
+	gem 'rerun'
+	gem 'rackup'
+	gem 'webrick'
+end

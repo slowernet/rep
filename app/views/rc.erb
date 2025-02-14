@@ -5,9 +5,13 @@
 	</div>
 
 	<div class="mb4">
+		<button class="pa2 bg-transparent br2 bn flex f6 pointer" data-pick>Pick articles</button>
+	</div>
+
+	<div class="mb4">
 		<% @publication.sources.each do |s| %>
 			<div class="flex items-center mb3">
-				<button class="pa2 bg-transparent br2 bn flex f6 pointer" data-source-id="<%= s.id %>">Fetch <%= s.name %> stories</button>
+				<button class="pa2 bg-transparent br2 bn flex f6 pointer" data-source-id="<%= s.id %>">Source <%= s.name %> articles</button>
 			</div>
 	  	<% end %>
 	</div>
@@ -31,8 +35,8 @@
 		const c = tinycolor.random().lighten().desaturate().setAlpha(.5)
 		qsa('button[data-source-id]').forEach(el => {
 			el.addEventListener('click', ev => {
-				fetch('/rc/api/publications/<%= @publication.id %>/articles', {
-					method: 'PUT',
+				fetch('/rc/api/publications/<%= @publication.id %>/articles/source', {
+					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({
 						source_id: el.dataset.sourceId
@@ -42,5 +46,21 @@
 
 			el.style.backgroundColor = c.spin(137.5)
 		})
+
+		qsa('button[data-pick]').forEach(el => {
+			el.addEventListener('click', ev => {
+				fetch('/rc/api/publications/<%= @publication.id %>/articles/pick', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+
+					})
+				}).then(r => r.json()).then(e => console.log(e))
+			})
+
+			el.style.backgroundColor = c.spin(137.5)
+		})
+
+
 	})
 </script>

@@ -1,4 +1,31 @@
-Assist in selecting a set of 8 stories to include in an email newsletter that has the goal of providing a concise summary of industry news in the subject area: "%{subject_area}".
+Process the provided array of data about news articles. Select a diverse, high-impact set of %{count} of the most relevant and newsworthy articles, ensuring strong coverage across different top concepts in the subject area: "%{subject_area}". The goal is to provide a concise summary of industry news.
 
-Criteria for selection
-* Do not include stories that are likely to be sponsored marketing content. This may be denoted by a high "is_sponsored" score
+Selection Criteria
+* High Relevance & Newsworthiness
+	* Prioritize articles where:
+		* is_relevant >= 0.8 (strongly related to the residential real estate industry).
+		* is_newsworthy >= 0.7 (significant impact, affects many people, or unexpected).
+	* If needed to complete a balanced selection, allow is_newsworthy as low as 0.6 but prioritize the highest-scoring items first.
+	* Do not include stories that are likely to be sponsored marketing content. This may be denoted by a high "is_sponsored" score.
+* Diverse Top Concepts
+	* Aim for broad coverage across different industry topics.
+	* Select no more than 2 articles with the same top_concept (e.g., if multiple articles have “mortgage rates” as the top_concept, select only the highest-ranked ones).
+	* Pick no more than 2 articles that are likely to be instructional or how-to content. This may be denoted by a high "is_service" score.
+* Source Limitation
+	* No more than 2 articles from any single source_id
+	* If a source has more than 2 strong candidates, choose the most relevant and newsworthy ones.
+* Prioritize Original Reporting and Analysis
+	* If multiple articles cover the same event, prefer those with unique insights, expert commentary, or exclusive data over simple news summaries.
+* Additional Considerations
+	* If two articles are similar in topic, pick the one that provides deeper insight or more original analysis.
+	* Ensure the final set represents a balanced mix of industry themes (e.g., mortgages, brokerages, legal issues, market trends).
+	* If fewer than %{count} articles meet the criteria, return as many as possible rather than forcing lower-quality selections.
+
+Return Format
+* Return an array of JSON objects, including all fields from the input for each candidate
+* Wrap the array of objects in an outer object under the key "results".
+
+INPUT
+```json
+%{json}
+```

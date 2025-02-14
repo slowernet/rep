@@ -1,18 +1,15 @@
-Instructions
-
+INSTRUCTIONS
 Process the provided array of headline-article pairs and return a JSON object for each, wrapped inside an outer object under the key "results". All responses should be evaluated in the context of the project subject area: "%{subject_area}".
 
-Data to return
+RETURN DATA
 * `is_relevant` (0-1 scale): Measures how strongly the content relates to the project subject area. A high score (0.8+) means it is central to the field.
 * `is_newsworthy` (0-1 scale): Measures the significance of the content based on how many people it affects, the disruption it may cause, and how unexpected it is within the industry.
 * `is_service` (0-1 scale): Likelihood that the content is educational or how-to journalism.
 * `is_roundup` (0-1 scale): Likelihood that the content summarizes multiple topics, determined by the presence of diverse themes and external links.
 * `is_sponsored` (0-1 scale): Likelihood that the content is sponsored, inferred from explicit disclosures or promotional language.
-* `beat_relevance` (Object with 0-1 values): Strength of association with the key industry rubrics in these label-description pairs:
-```json
+* `beat_relevance` (Object with 0-1 values): Strength of association with the key industry labels from these label-description pairs:
 %{beat_descriptions}
-```
-* `top_concept` (string, max 3 words): The most representative concept of the article within the project subject area.
+* `top_concept` (string, max 3 words): The most representative concept in the article in the scope of the project subject area.
 * `tags` (up to 10 items): Keywords including people, companies, organizations, places, or inferred concepts. Prioritize the most relevant.
 * `celebrities` (array of names): Recognized public figures mentioned in the content. If none, return an empty array.
 * `article_summary` (one sentence): A summary of the `article` (not the `headline`) that adds information beyond the headline, uses a knowledgeable tone, and avoids repetitive phrasing like "The article discusses..."
@@ -20,7 +17,7 @@ Data to return
 be informative without direct repetition, use an expert tone, and avoid phrases like "This piece covers..."
 ne sentence summary of the headline and article together, that: * will be shared instead of both the headline and article, so it must stand on its own informationally
 
-Input
+INPUT
 ```json
 %{json}
 ```

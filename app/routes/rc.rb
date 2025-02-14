@@ -52,24 +52,39 @@ puts request.POST
 					end
 
 					r.on 'articles' do
-						r.put do
+						r.post 'pick' do
+							candidates = Article.find(publication_id: @publication.id).to_a.map { |a| a.attributes.merge(article_id: a.id) }
+puts candidates[0].inspect; return
+							candidates = candidates.sample(25)
+							prompt = Config::AI::PICKER_PROMPT % {
+								count: 8,
+								subject_area: @publication.subject_area,
+								json: candidates.map(&:json).join("\n")
+							}
+							ai = (Config::AI::ACTIVE_PROVIDER).completion(prompt)
+							ai.to_json
+# puts prompt; return
+						end
+
+						r.post 'source' do
 							source = Source[request.POST['source_id']]
 							feed = get_feed(source.feed_url)
 
 							prompt = Config::AI::SOURCER_PROMPT % {
 								subject_area: @publication.subject_area,
-								beat_descriptions: @publication.beats.map { |b| { b.slug => b.description } }.to_json,
+								beat_descriptions: @publication.beats.map { |b| "\t`#{b.slug}`: #{b.description}\n" }.join,
 								json: feed.reduce([]) { |acc, i| acc << {
 									headline: i['headline'],
 									article: i['article']
 								} }.to_json
 							}
-puts prompt	# return
+# puts prompt; return
 							ai = (Config::AI::ACTIVE_PROVIDER).completion(prompt)
-puts ai.to_json; return
+# puts ai.to_json; return
 # ai.each { |a| puts a['tags'].to_json } # return
 							rv = feed.map.with_index do |item, i|
 								item['source'] = source.name
+								item['source_id'] = source.id
 								item.merge(ai[i])
 							end
 # ai.each { |i| puts i.keys.to_s }
@@ -83,7 +98,7 @@ puts ai.to_json; return
 								item = item.values
 								acc << (item.unshift(Config::AI::ACTIVE_PROVIDER.model) << now)
 							end
-puts sheet_data.to_json
+# puts sheet_data.to_json; return
 # url:, spreadsheet_id:, worksheet_id:, sheet_data
 							send_to_sheet(
 								url: Config::Pipedream::ARRAY_TO_SHEET_URL,

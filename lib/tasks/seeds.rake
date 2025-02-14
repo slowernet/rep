@@ -1,7 +1,7 @@
 namespace :seeds do
 	desc 'create publications'
 	task :publications => :environment do
-		Publication.create({"name"=>"Real Estate", "subject_area"=>"The residential real estate industry, including brokers, agents, mortgage professionals, and the transaction"})
+		Publication.create({"name"=>"Real Estate", "subject_area"=>"The residential real estate industry, including brokers, agents, mortgages, regulations, inventory, technology, and the transaction."})
 	end
 
 	desc 'create beats'
